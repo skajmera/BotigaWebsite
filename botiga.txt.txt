@@ -1,0 +1,294 @@
+signup user API:
+modules:bcrypt,
+end point:user/signup
+time:45 min.
+method:post
+    first_name
+    last_name
+    contact
+    email
+    password
+
+////////////////////
+
+login user:
+end point:user/login
+time:45 min.
+modules: jsonwebtoken,bcrypt,nodemailer,cron-jobs,
+method:post
+    email
+    password
+
+/////////////////
+
+forgot password:
+end point : user/forgot password
+time:1 hours
+modules:nodemailer
+methode:put
+    email
+///////////////////////////
+
+verify Email :
+end point:user/emailVerified
+time:30 minute
+link:id
+method:put
+    _id
+    isVerify: true
+
+
+/////////////////
+
+reset password:
+end point:user/reset password
+time : 20 minute
+modules:bcrypt
+methode:put
+    new password
+    _id
+
+/////////////////
+
+reset password for link:
+end point:user/resetPassword/:_id
+time : 10 minute
+module: null
+method:get
+    _id
+
+//////////////////
+
+update password:
+end point: user/update password
+time:40 minute
+modules:jwt,bcrypt
+method:put
+    _id
+    old password
+    new password
+
+//////////////////
+using jwt authentication:
+ time : 30 minute
+
+ ////////////////
+ signup customer API:
+modules:bcrypt,
+end point:customer/signup
+time:45 min.
+method:post
+    first_name
+    last_name
+    contact
+    email
+    password
+
+ //////////////
+login customer:
+end point:customer/login
+time:45 min.
+modules: jsonwebtoken,bcrypt,nodemailer,cron-jobs,
+method:post
+    email
+    password
+
+ /////////////
+
+forgot password:
+end point : customer/forgot password
+time:1 hours
+modules:nodemailer
+methode:put
+    email
+///////////////////////////
+
+verify Email :
+end point:customer/emailVerified
+time:30 minute
+link:id
+method:put
+    _id
+    isVerify: true
+
+
+/////////////////
+
+reset password:
+end point:customer/reset password
+time : 20 minute
+modules:bcrypt
+methode:put
+    new password
+    _id
+
+
+/////////
+creating nodemailer function
+module: nodemailer,timezon 
+time:1 hours.
+
+ /////////////////
+
+creating cron-jobs function
+modules: cron-jobs,timezon
+time:45 min.
+
+
+ //////////////////
+
+customer address :
+end point : customer/address
+time : 1 hours
+methode:put
+        'address_1
+        'address_2'
+        'city'
+        'region'
+        'postal_code'
+        'country'
+
+//////////////////////////
+
+contact leave us a message:
+modules: socket.io
+time: 1 day
+end point: message/comment
+methode : post
+    name 
+    email
+    website
+    comment
+
+////////////////////
+create product :
+module: stripe
+time:1 day
+end point : createProduct
+method:post
+    productName
+    description
+     unit_amount
+    currency
+    recurring
+/////////////////
+
+purchase order:
+endpoint:payment
+time:7 hours
+methode:post
+     email
+      description
+      name
+      address: {
+      line1
+        postal_code
+        city
+        state
+        country
+        number
+        exp_month
+        exp_year
+        cvc
+         price_id
+         quantity
+
+////////////////////////
+search product 
+end point : searchProduct
+time:3 hours
+methode:post
+    find Items
+    name
+    description
+    price
+
+////////////////////
+
+find product by sorting
+endpoint: productName/sorting
+time:6 hours
+methode : post
+    sortByLatest
+    sortByPrice:low to high
+    sortByPrice:hight t0 low
+    default sorting 
+    sortByPopularity
+    sortByAverageRating
+
+//////////////////////////
+
+show all result 
+time: 30 minute
+end point:totalProduct
+methode:get
+    _id
+
+/////////////////
+add to cart
+end point:shoppingcart/add
+time 1 day
+methode: post
+    product_id
+    quantity
+    date
+    item_id
+    'name
+    image
+    price
+//////////////
+//////////////////////
+shopingCartTotalAmount
+time: 3 hours
+endPoin:shoppingcart/totalAmount/:cart_id
+methode : get
+    cart_id
+
+//////////////////////
+shoping Items Move to cart
+shoppingcart/movetocart/:item_id
+time:6 hours
+method:post
+      table.increments('item_id').primary();
+        cart_id
+        product_id
+        quantity
+        added_on date time
+////////////////////////
+shopingcart remove Items
+time:2 hours
+end point:shoppingcart/removedProduct/:item_id
+methode :dalete
+    Item_id
+
+////////////////////////
+
+upload image
+time:5 hours
+endpoint: upload/pictures
+modules:multer
+methode:post
+    addfile
+
+//////////////////////////
+
+
+EOD:Good Night!
+Task 1: worked on written down the details of all the API that is needed on the website. Also added the estimation.
+Task 2: Worked on Created Botiga APIs (
+    endPoint:users/signup, users/login with jwt authentication, users/forgotPassword, users/verifyEmail, users/resetPassword, users/resetPassword/:_id,
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
