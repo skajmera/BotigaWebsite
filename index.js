@@ -1,6 +1,7 @@
 require("./mongo");
 require("dotenv").config();
 // require("./cron_job/cron");
+const chaatController = require("./controller/chatDataController");
 const cors = require("cors");
 const morgan = require("morgan");
 const express = require("express");
@@ -13,6 +14,8 @@ const customerRouters = require("./routes/customerRoutes");
 const productRouters = require("./routes/productRoutes");
 const orderRouters = require("./routes/orderRoutes");
 const paymentRouters = require("./payment");
+const chatRouters = require("./routes/chatDataRoutes");
+
 
 const app = express();
 
@@ -39,6 +42,7 @@ app.use("/products", productRouters);
 app.use("/customers", customerRouters);
 app.use("/orders", orderRouters);
 app.use("/payments", paymentRouters);
+app.use("/chat", chatRouters);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
@@ -63,6 +67,19 @@ io.on("connection", (socket) => {
   console.log(socket.id, "is online");
   socket.on("message", (msg) => {
     console.log(msg);
+    /////////////////////
+    
+    const funcData = async () => {
+      const result = await chatController.saveUserChat({
+        "name": msg.user,
+        "userId": socket.id,
+        "message": msg.message});
+      console.log(result)
+      return result
+      // await userController.saveUserChat(req);
+    }
+    funcData()
+    ////////////////
     socket.broadcast.emit("message", msg);
   });
   socket.on("disconnect", () => {
