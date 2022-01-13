@@ -6,22 +6,22 @@ const router = express.Router();
 const customerController = require("../controller/customerController");
 
 router.post("/signup", async (req, res) => {
-  const result = await customerController.createUser(req);
+  const result = await customerController.createCustomer(req);
   return res.send(result);
 });
 
 router.get("/getUser", authenticateToken, async (request, response) => {
-  const result = await customerController.getUser(request);
+  const result = await customerController.getCustomer(request);
   return response.json(result);
 });
 
 router.post("/login", async (req, res) => {
-  const result = await customerController.loginUser(req);
+  const result = await customerController.loginCustomer(req);
   return res.json(result);
 });
 
 router.put("/updateProfile", authenticateToken, async (req, res) => {
-  const result = await customerController.updateUser(req);
+  const result = await customerController.updateCustomer(req);
   return res.json(result);
 });
 
@@ -30,8 +30,8 @@ router.put("/updatePassword", authenticateToken, async (req, res) => {
   return res.send(result);
 });
 
-router.post("/invite/signup", async (req, res) => {
-  const result = await customerController.createUserByLink(req);
+router.post("/invite/signup",authenticateToken, async (req, res) => {
+  const result = await customerController.createCustomerByLink(req);
   return res.send(result);
 });
 
@@ -62,7 +62,7 @@ router.put("/resetPassword", async (req, res) => {
 router.get("/resetPassword/:_id", customerController.getId);
 
 router.get("/getAll", async (req, res) => {
-  const result = await customerController.getAllusers(req);
+  const result = await customerController.getAllCustomer(req);
   return res.send(result);
 });
 

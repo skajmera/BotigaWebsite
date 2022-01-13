@@ -2,7 +2,7 @@ const usersDataAccess = require("../dal/chatDataDal");
 const {generateAccessToken}=require('../utils/jwt')
 require("dotenv").config();
 
-exports.getUser = async (req) => {
+exports.getData = async (req) => {
   const userId = req.body.userId;
   const users = await usersDataAccess.findUserChatId({userId: userId});
 //   const token=generateAccessToken({_id:users._id})
@@ -49,7 +49,7 @@ exports.saveUserChat = async (req) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateData = async (req, res) => {
   const userId = req.body.userId;
   const updateData = {
     userId,
@@ -67,7 +67,7 @@ exports.updateUser = async (req, res) => {
   };
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteData = async (req, res) => {
   const data = await usersDataAccess.deleteUser(req.body);
   return {
     error: false,

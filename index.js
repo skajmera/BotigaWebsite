@@ -1,7 +1,7 @@
 require("./mongo");
 require("dotenv").config();
 // require("./cron_job/cron");
-const chaatController = require("./controller/chatDataController");
+const chatController = require("./controller/chatDataController");
 const cors = require("cors");
 const morgan = require("morgan");
 const express = require("express");
@@ -26,6 +26,12 @@ app.use(
   })
 );
 
+app.use(express.static(__dirname + "/public"));
+app.get("/s", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -44,6 +50,7 @@ app.use("/orders", orderRouters);
 app.use("/payments", paymentRouters);
 app.use("/chat", chatRouters);
 
+
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
@@ -56,6 +63,7 @@ const http = require("http").createServer(app);
 http.listen(PORT, () => {
   console.log(`app listening on port ${PORT}`);
 });
+
 // app.use(express.static(__dirname + "/public"));
 // app.get("/", (req, res) => {
 //   res.sendFile(__dirname + "/index.html");
@@ -89,3 +97,7 @@ io.on("connection", (socket) => {
   });
   console.log("total users online:-", count);
 });
+
+
+
+

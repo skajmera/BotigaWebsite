@@ -47,39 +47,6 @@ exports.createUser = async (req) => {
   };
 };
 
-// exports.createUserByLink = async (req) => {
-//   const { email, password, firstName, lastName, contact } = req.body;
-//   if (!password || !email || !firstName || !lastName || !contact) {
-//     throw new ExpressError(401, "Bad request");
-//   }
-//   const passwordHash = bcrypt.hashSync(req.body.password, 10);
-//   const data = {
-//     profileImage: "uploads/1633780506772defaultImage.jpg",
-//     isVerified: false,
-//     firstName: req.body.firstName,
-//     lastName: req.body.lastName,
-//     inviteLink:true,
-//     contact: req.body.contact,
-//     email: req.body.email,
-//     password: passwordHash,
-//   };
-//   const storedUser = await usersDataAccess.storeUser(data);
-//   const otpSend = {
-//     from: process.env.email,
-//     to: storedUser.email,
-//     subject: "Sending email using node.js",
-//     text: `http://localhost:3001/Resetpassword/${storedUser._id}`,
-//   };
-//   myFunction(otpSend);
-//   return {
-//     error: false,
-//     sucess: true,
-//     message: "user created successfully",
-//     data: storedUser,
-//   };
-// };
-
-
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {

@@ -9,13 +9,13 @@ paypal.configure({
     'client_id': process.env.client_id,
     'client_secret': process.env.client_secret
 });
-router.get('/d',(req,res)=>{
+router.get('/page',(req,res)=>{
     res.send("hello")
 })
 
-router.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
+router.get('/', authenticateToken,(req, res) => res.sendFile(__dirname + "/index.html"));
 
-router.post('/pay', (req, res) => {
+router.post('/pay',authenticateToken ,(req, res) => {
     const create_payment_json = {
       "intent": "sale",
       "payer": {
@@ -81,6 +81,19 @@ router.post('/pay', (req, res) => {
           const data2={
               paymentMethod:data
           }
+
+const result = orderController.paymentDetails(data2);
+        return  res.send(result);
+      }
+  });
+  });
+
+router.get('/cancel', (req, res) => res.send('Cancelled'));
+
+module.exports = router
+
+// sb-whjap10785749@business.example.com
+
 //           let data={
 //     "currency":"USD", //req.body.currency,
 // "totalPrice":24000,// req.body.totalAmount,
@@ -96,18 +109,3 @@ router.post('/pay', (req, res) => {
 //     "email_address": "sss",//req.body.email
 // },
 // }
-
-const result = orderController.paymentDetails(data2);
-        return  res.send(result);
-      }
-  });
-  });
-
-router.get('/cancel', (req, res) => res.send('Cancelled'));
-
-module.exports = router
-
-
-
-// sb-whjap10785749@business.example.com
-

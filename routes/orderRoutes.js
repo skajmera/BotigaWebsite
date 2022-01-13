@@ -41,17 +41,6 @@ router.put("/checkout/:CustomerId", authenticateToken, async (req, res) => {
 module.exports = router;
 
 
-
-// "prodId": "61d97bd8a15dc0f3fc84d2c3",
-// "_id": "61dc0762e4dbc9a39270cc61"
-// }
-// ],
-// "_id": "61dc0762e4dbc9a39270cc60",
-// "__v": 0
-// }
-
-////////////
-
 // {
 //     "orderItems":[
 //         {

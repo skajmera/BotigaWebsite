@@ -5,7 +5,7 @@ const ExpressError = require("../utils/errorGenerator");
 const { generateAccessToken } = require("../utils/jwt");
 const { myFunction } = require("../utils/nodemailer");
 
-exports.getUser = async (req) => {
+exports.getCustomer = async (req) => {
   const _id = req.token_data._id;
   const users = await customerDataAccess.findUser({ _id: _id });
   return {
@@ -16,7 +16,7 @@ exports.getUser = async (req) => {
   };
 };
 
-exports.createUser = async (req) => {
+exports.createCustomer = async (req) => {
   const { email, password, firstName, lastName, contact } = req.body;
   if (!password || !email || !firstName || !lastName || !contact) {
     throw new ExpressError(401, "Bad request");
@@ -47,7 +47,7 @@ exports.createUser = async (req) => {
   };
 };
 
-exports.createUserByLink = async (req) => {
+exports.createCustomerByLink = async (req) => {
   const { email, password, firstName, lastName, contact } = req.body;
   if (!password || !email || !firstName || !lastName || !contact) {
     throw new ExpressError(401, "Bad request");
@@ -80,7 +80,7 @@ exports.createUserByLink = async (req) => {
 };
 
 
-exports.loginUser = async (req, res) => {
+exports.loginCustomer = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return new ExpressError(
@@ -108,7 +108,7 @@ exports.loginUser = async (req, res) => {
   };
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateCustomer = async (req, res) => {
   const _id = req.token_data._id;
   const updateData = {
     _id,
@@ -179,7 +179,7 @@ exports.uploadImage = async (req, res) => {
   };
 };
 
-exports.getAllusers = async (req, res) => {
+exports.getAllCustomer = async (req, res) => {
   const users = await customerDataAccess.findAll();
   return {
     error: false,
